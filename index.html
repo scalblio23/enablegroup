@@ -10,17 +10,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0b1730;
-    --bg-deep: #081124;
-    --text: #ffffff;
-    --muted: #c9d2e3;
-    --subtle: #8f9bb3;
-    --accent: #8fb8ff;
-    --accent-strong: #3d7bf0;
+    /* Tan page, white survey card, deep caramel accent */
+    --bg: #e9dcc6;
+    --text: #2b2116;
+    --muted: #5b4b38;
+    --subtle: #7d6c56;
+    --accent: #8b5a2b;
+    --accent-strong: #8b5a2b;
+    --accent-hover: #6f4620;
     --card: #ffffff;
-    --card-text: #0f1b33;
-    --card-border: #dbe2ee;
-    --rule: rgba(255,255,255,0.12);
+    --card-text: #2b2116;
+    --card-border: #e6dccb;
+    --card-tint: #faf5ec;
+    --card-select: #f3e8d6;
+    --track: #f1e9dc;
+    --error: #b3392f;
+    --rule: rgba(43,33,22,0.16);
+    color-scheme: light;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -36,12 +42,12 @@
   /* Header */
   .brand { display: inline-flex; align-items: center; gap: 16px; margin-bottom: 36px; }
   .logo {
-    background: #fff; border-radius: 4px; width: 110px; height: 130px;
+    background: var(--card); box-shadow: 0 6px 18px rgba(80,55,25,.12); border-radius: 4px; width: 110px; height: 130px;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
   }
   .logo svg { width: 58px; height: 58px; }
-  .logo .name { color: #1b3a8c; font-weight: 800; font-size: 19px; letter-spacing: 1px; line-height: 1; }
-  .logo .sub { color: var(--accent-strong); font-weight: 600; font-size: 9px; letter-spacing: 3px; line-height: 1; }
+  .logo .name { color: var(--text); font-weight: 800; font-size: 19px; letter-spacing: 1px; line-height: 1; }
+  .logo .sub { color: var(--accent); font-weight: 600; font-size: 9px; letter-spacing: 3px; line-height: 1; }
   .brand-tag { color: var(--muted); font-size: 13px; font-weight: 500; letter-spacing: .3px; }
 
   .eyebrow { color: var(--accent); font-weight: 700; font-size: 16px; margin: 0 0 18px; }
@@ -50,7 +56,7 @@
     font-size: clamp(30px, 5.6vw, 54px); line-height: 1.1; margin: 0 auto 28px; max-width: 820px;
   }
   .lead { color: var(--muted); font-size: clamp(16px, 2vw, 20px); max-width: 840px; margin: 0 auto 30px; line-height: 1.75; }
-  .lead strong { color: #fff; font-weight: 600; }
+  .lead strong { color: var(--text); font-weight: 600; }
 
   .highlight { color: var(--accent); font-weight: 700; font-size: 22px; margin: 0 0 4px; }
   .fine { color: var(--subtle); font-size: 11px; margin: 0 0 36px; }
@@ -66,21 +72,21 @@
   .card {
     background: var(--card); color: var(--card-text); text-align: left;
     max-width: 628px; margin: 0 auto; border-radius: 16px; border-top: 6px solid var(--accent-strong);
-    padding: 40px 38px 44px; box-shadow: 0 30px 60px rgba(0,0,0,.35);
+    padding: 40px 38px 44px; box-shadow: 0 24px 50px rgba(80,55,25,.16);
   }
-  .step-label { text-align: right; color: #6b7487; font-size: 14px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
-  .progress { height: 6px; background: #eef1f6; border-radius: 99px; overflow: hidden; margin-bottom: 36px; }
+  .step-label { text-align: right; color: var(--subtle); font-size: 14px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .progress { height: 6px; background: var(--track); border-radius: 99px; overflow: hidden; margin-bottom: 36px; }
   .progress span { display: block; height: 100%; width: 0; background: var(--accent-strong); border-radius: 99px; transition: width .35s ease; }
   .q { font-size: 22px; font-weight: 700; margin: 0 0 26px; line-height: 1.3; }
   .options { display: grid; gap: 15px; }
   .opt {
     display: block; width: 100%; text-align: left; font: inherit; font-size: 18px; font-weight: 500; color: var(--card-text);
-    background: #fff; border: 2px solid var(--card-border); border-radius: 8px; padding: 16px 22px; cursor: pointer;
+    background: var(--card); border: 2px solid var(--card-border); border-radius: 8px; padding: 16px 22px; cursor: pointer;
     transition: border-color .15s, background .15s, transform .1s;
   }
-  .opt:hover, .opt:focus-visible { border-color: var(--accent-strong); background: #f4f8ff; outline: none; }
+  .opt:hover, .opt:focus-visible { border-color: var(--accent-strong); background: var(--card-tint); outline: none; }
   .opt:active { transform: scale(.995); }
-  .opt.selected { border-color: var(--accent-strong); background: #eaf2ff; }
+  .opt.selected { border-color: var(--accent-strong); background: var(--card-select); }
   .step { display: none; }
   .step.active { display: block; animation: fade .3s ease; }
   @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -89,24 +95,24 @@
   .field label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
   .field input {
     width: 100%; font: inherit; font-size: 17px; padding: 14px 16px; color: var(--card-text);
-    border: 2px solid var(--card-border); border-radius: 8px; background: #fff;
+    border: 2px solid var(--card-border); border-radius: 8px; background: var(--card);
   }
   .field input:focus { outline: none; border-color: var(--accent-strong); }
-  .field input.invalid { border-color: #d64545; }
-  .consent { font-size: 12px; color: #6b7487; margin: 6px 0 18px; line-height: 1.5; }
+  .field input.invalid { border-color: var(--error); }
+  .consent { font-size: 12px; color: var(--subtle); margin: 6px 0 18px; line-height: 1.5; }
   .submit {
-    width: 100%; font: inherit; font-size: 18px; font-weight: 700; color: #fff; background: var(--accent-strong);
+    width: 100%; font: inherit; font-size: 18px; font-weight: 700; color: var(--card); background: var(--accent-strong);
     border: 0; border-radius: 8px; padding: 17px 22px; cursor: pointer; transition: background .15s;
   }
-  .submit:hover { background: #2f69da; }
+  .submit:hover { background: var(--accent-hover); }
   .submit:disabled { opacity: .6; cursor: default; }
-  .back { margin-top: 18px; background: none; border: 0; font: inherit; font-size: 14px; color: #6b7487; cursor: pointer; padding: 0; }
+  .back { margin-top: 18px; background: none; border: 0; font: inherit; font-size: 14px; color: var(--subtle); cursor: pointer; padding: 0; }
   .back:hover { color: var(--card-text); }
-  .error { color: #d64545; font-size: 13px; margin: -6px 0 12px; min-height: 0; }
+  .error { color: var(--error); font-size: 13px; margin: -6px 0 12px; min-height: 0; }
 
   .thanks { text-align: center; padding: 10px 0; }
-  .thanks .tick { width: 64px; height: 64px; border-radius: 50%; background: #eaf2ff; color: var(--accent-strong); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 18px; }
-  .thanks p { color: #4a556b; font-size: 16px; margin: 0; }
+  .thanks .tick { width: 64px; height: 64px; border-radius: 50%; background: var(--card-select); color: var(--accent-strong); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .thanks p { color: var(--muted); font-size: 16px; margin: 0; }
 
   .for { color: var(--muted); font-size: 16px; max-width: 820px; margin: 32px auto 32px; }
 
@@ -115,14 +121,14 @@
     padding: 22px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 30px; color: var(--muted); font-size: 14px; font-weight: 500;
   }
   .trust span::before { content: "✓"; color: var(--accent); margin-right: 7px; font-weight: 700; }
-  .trust strong { color: #fff; }
+  .trust strong { color: var(--text); }
 
   h2 { font-size: 21px; font-weight: 700; margin: 0 0 18px; }
   .section p { color: var(--muted); font-size: 15px; max-width: 800px; margin: 0 auto 14px; line-height: 1.75; }
-  .section p strong { color: #fff; }
+  .section p strong { color: var(--text); }
   .why { list-style: none; padding: 0; margin: 4px auto 18px; max-width: 640px; display: grid; gap: 10px; }
   .why li { color: var(--muted); font-size: 15px; }
-  .why li strong { color: #fff; }
+  .why li strong { color: var(--text); }
 
   .disclaimer { color: var(--subtle); font-size: 12px; max-width: 840px; margin: 40px auto 30px; line-height: 1.7; }
   .copy { color: var(--subtle); font-size: 11px; }
@@ -141,7 +147,7 @@
   <div class="brand">
     <div class="logo" aria-label="Enable Group">
       <svg viewBox="0 0 60 60" aria-hidden="true">
-        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f8cff"/><stop offset="1" stop-color="#1b3a8c"/></linearGradient></defs>
+        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8955c"/><stop offset="1" stop-color="#7a4c22"/></linearGradient></defs>
         <path d="M30 6 L54 26 L48 26 L48 52 L12 52 L12 26 L6 26 Z" fill="url(#g)"/>
         <rect x="19" y="32" width="8" height="8" rx="1" fill="#fff"/><rect x="33" y="32" width="8" height="8" rx="1" fill="#fff"/>
         <rect x="26" y="42" width="8" height="10" rx="1" fill="#fff"/>
@@ -163,7 +169,7 @@
     developments in high-yield markets with a moat &mdash; projects most developers can't deliver.
   </p>
 
-  <p class="highlight">Target 11&ndash;14% gross yield*</p>
+  <p class="highlight">Target 17% gross yield*</p>
   <p class="fine">*Approximate target only. Not a forecast or guarantee. Returns depend on the project, market conditions and individual circumstances.</p>
 
   <h2 class="cta-title">Complete the survey below to apply for first access.</h2>
@@ -236,7 +242,7 @@
   <p class="for">For investors ready to put their equity to work in cash-flowing property &mdash; with first access to new projects yet to be released on the market.</p>
 
   <div class="trust">
-    <span><strong>11&ndash;14%</strong> target gross yield</span>
+    <span><strong>17%</strong> target gross yield</span>
     <span>High-yield markets with a moat</span>
     <span>Complex developments most can't deliver</span>
     <span>First access to off-market projects</span>
