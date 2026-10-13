@@ -66,6 +66,11 @@
     background: linear-gradient(to bottom, var(--bg) 0%, color-mix(in srgb, var(--bg) 78%, transparent) 25%, color-mix(in srgb, var(--bg) 62%, transparent) 55%, color-mix(in srgb, var(--bg) 72%, transparent) 80%, var(--bg) 100%);
   }
   .lead { color: var(--muted); font-size: clamp(16px, 2vw, 20px); max-width: 840px; margin: 0 auto 16px; line-height: 1.6; }
+  .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 56px; margin: 6px 0 4px; }
+  .stat { display: flex; flex-direction: column; align-items: center; }
+  .stat-num { font-size: clamp(30px, 4vw, 40px); font-weight: 800; color: var(--accent); line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .stat-label { font-size: 14px; font-weight: 600; color: var(--text); text-transform: uppercase; letter-spacing: .6px; }
+  .stats-note { font-size: 13px; color: var(--muted); margin: 0 0 18px; }
   .lead strong { color: var(--text); font-weight: 600; }
 
   .fine { color: var(--subtle); font-size: 11px; margin: 0 0 36px; }
@@ -171,6 +176,11 @@
     crisis for students, renters and people who need a home. We specialise in complex co-living
     developments in high-yield markets with a moat &mdash; projects most developers can't deliver.
   </p>
+  <div class="stats">
+    <div class="stat"><span class="stat-num">$3,150</span><span class="stat-label">a week in rental income</span></div>
+    <div class="stat"><span class="stat-num">$105K</span><span class="stat-label">profit per year</span></div>
+  </div>
+  <p class="stats-note">On a typical 9-bedroom co-living space</p>
   </div>
 
 
@@ -185,18 +195,7 @@
     <div class="step-label" id="stepLabel">Step 1 of 4</div>
     <div class="progress"><span id="bar"></span></div>
 
-    <div class="step active" data-step="1" data-key="equity">
-      <h3 class="q">How much equity do you have available to invest?</h3>
-      <div class="options">
-        <button type="button" class="opt">Under $250K</button>
-        <button type="button" class="opt">$250K &ndash; $400K</button>
-        <button type="button" class="opt">$400K &ndash; $750K</button>
-        <button type="button" class="opt">$750K &ndash; $1.5M</button>
-        <button type="button" class="opt">$1.5M+</button>
-      </div>
-    </div>
-
-    <div class="step" data-step="2" data-key="goal">
+    <div class="step active" data-step="1" data-key="goal">
       <h3 class="q">What's your main investment goal?</h3>
       <div class="options">
         <button type="button" class="opt">Strong, reliable cash flow</button>
@@ -204,6 +203,17 @@
         <button type="button" class="opt">Both cash flow and growth</button>
         <button type="button" class="opt">Diversifying my portfolio</button>
         <button type="button" class="opt">Other</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="2" data-key="equity">
+      <h3 class="q">How much equity do you have available to invest?</h3>
+      <div class="options">
+        <button type="button" class="opt">Under $250K</button>
+        <button type="button" class="opt">$250K &ndash; $400K</button>
+        <button type="button" class="opt">$400K &ndash; $750K</button>
+        <button type="button" class="opt">$750K &ndash; $1.5M</button>
+        <button type="button" class="opt">$1.5M+</button>
       </div>
     </div>
 
