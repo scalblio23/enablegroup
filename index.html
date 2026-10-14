@@ -261,9 +261,9 @@ src="https://www.facebook.com/tr?id=981461050994198&ev=PageView&noscript=1"></no
       <div class="thanks">
         <div class="tick"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg></div>
         <h3 class="q" style="margin-bottom:10px">You're on the list.</h3>
-        <p>Thanks for applying. A member of our team will be in touch shortly to walk you through upcoming projects before they're released to market.</p>
+        <p>Simply book a call below.</p>
       </div>
-      <iframe class="booking" src="https://scalbl-crmproper.vercel.app/book/enable-group-c578f4" width="100%" height="700" frameborder="0" title="Book a call with Enable Group"></iframe>
+      <iframe class="booking" id="booking" data-src="https://scalbl-crmproper.vercel.app/book/enable-group-c578f4" width="100%" height="700" frameborder="0" title="Book a call with Enable Group"></iframe>
     </div>
 
     <button type="button" class="back" id="backBtn" hidden>&larr; Back</button>
@@ -361,6 +361,9 @@ src="https://www.facebook.com/tr?id=981461050994198&ev=PageView&noscript=1"></no
       }
     } catch (_) { /* still show confirmation */ }
     if (window.fbq) fbq('track', 'Lead');
+    const booking = document.getElementById('booking');
+    const prefill = new URLSearchParams({ name: payload.name, email: payload.email, phone: payload.phone });
+    booking.src = booking.dataset.src + '?' + prefill.toString();
     show('done');
   });
 
