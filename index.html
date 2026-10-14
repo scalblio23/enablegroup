@@ -296,7 +296,7 @@ src="https://www.facebook.com/tr?id=981461050994198&ev=PageView&noscript=1"></no
 
 <script>
   // Set this to your CRM / Make / Zapier webhook URL to receive leads.
-  const WEBHOOK_URL = '';
+  const WEBHOOK_URL = 'https://hook.eu1.make.com/rmxq8ia6rq9a237jjvugajs8136xppge';
 
   const steps = [...document.querySelectorAll('.step')];
   const label = document.getElementById('stepLabel');
@@ -351,6 +351,7 @@ src="https://www.facebook.com/tr?id=981461050994198&ev=PageView&noscript=1"></no
     fields.forEach(f => payload[f.name] = f.value.trim());
     payload.source = location.href;
     payload.submittedAt = new Date().toISOString();
+    payload.submissionId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(36).slice(2);
 
     const btn = form.querySelector('.submit');
     btn.disabled = true; btn.textContent = 'Submitting…';
